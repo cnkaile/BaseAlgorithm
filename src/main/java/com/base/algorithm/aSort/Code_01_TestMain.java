@@ -5,18 +5,8 @@ public class Code_01_TestMain {
         System.out.println("this. tak.");
         System.out.println("this. tak.");
         //我是来捣乱的。
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        System.out.println("this. tak.");
+        System.out.println("this. tak.");
+        System.out.println("this. tak.");
     }
 }
