@@ -65,6 +65,7 @@ public class Code_00_BubbleSort {
             sort_bubble(source, true);
             BaseUtils.comparator(comparat);
             if(!BaseUtils.isEqual(source, comparat)){
+                BaseUtils.printArr(source);
                 is_ok = 1;
                 break;
             }
