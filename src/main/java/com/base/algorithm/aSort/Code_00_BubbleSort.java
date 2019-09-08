@@ -1,157 +1,94 @@
 package com.base.algorithm.aSort;
 
-import java.util.Arrays;
-
+import com.base.util.BaseUtils;
 import org.junit.Test;
 
 /**
- * code:    BubbleSort(冒泡排序)
- *
+ * 冒泡排序
+ * 时间复杂度：O(N^2)
+ * 空间复杂度：O(1)
+ * @Author: zhoukl
+ * @Date: 2019-09-08 15:20
  */
 public class Code_00_BubbleSort {
 
     /**
-     * BubbleSort Method
-     * @param arr
+     * 冒泡排序
+         * times:限制循环执行次数
+         * index:进行比较和交换的标识
+     * @param arr   排序数组
      */
-    public static void bubbleSort(int[] arr){
-        //if array's length is 1 or array is null. code end return;
+    public static void sort_bubble(int[] arr){
         if(arr == null || arr.length < 2){
             return;
         }
-        //bubbleSort begin
-        for(int end = arr.length - 1; end > 0; end--){
-            //first circulation control end boundary;第一层循环控制结尾的边界
-            for(int i = 0; i < end; i++){
-                //second circulation control compare time;第二层循环控制比较次数
-                if(arr[i] > arr[i+1]){
-                    swap(arr, i, i+1);
+        //bubble begin
+        for (int times = 0; times < arr.length - 1; times++) {
+            for (int index = 0; index < arr.length - times - 1; index++) {
+                if(arr[index] > arr[index + 1]){
+                    BaseUtils.swap_bit(arr, index, index+1);
                 }
             }
         }
+        //bubble end
     }
 
-    //swap array number
-    private static void swap(int[] arr, int i, int j) {
-        arr[i] = arr[i] ^ arr[j];
-        arr[j] = arr[i] ^ arr[j];
-        arr[i] = arr[i] ^ arr[j];
-    }
-
-    //copy method, copy array values
-    public static int[] copyArray(int[] arr){
-        if(arr == null){
-            return null;
-        }else{
-            int[] returnArr = new int[arr.length];
-            for (int i = 0; i < arr.length; i++){
-                returnArr[i] = arr[i];
-            }
-            return returnArr;
+    /**
+     * 冒泡排序 ： 这样思路更清晰
+         * end限制结尾
+         * start防止超过end的值
+     * @param arr   目标数组
+     * @param sign  没有意义，就是重写了方法
+     */
+    public static void sort_bubble(int[] arr, boolean sign){
+        if(null == arr || arr.length < 2){
+            return;
         }
-    }
-
-    //sort comparator. use comparator mySort whether is true;
-    //排序比较器，用来比较自己写的排序方法是否正确。
-    public static void comparator(int[] arr){
-        Arrays.sort(arr);
-    }
-
-    //generate random number array;生产随机数组
-    public static int[] generateRandomArray(int maxSize, int maxValue){
-        //random array length
-        int[] arr = new int[(int)((maxSize + 1) * Math.random())];
-        //random array value
-        for(int i = 0; i < arr.length; i++){
-            arr[i] = (int)((maxValue + 1) * Math.random()) - (int)((maxValue + 1) * Math.random());
-        }
-        return arr;
-    }
-
-    // judge two array value is equal. 判断两个排序后的数组是否一致
-    public static boolean isEqual(int[] target, int[] source){
-        //judge whether one is null other not null;
-        if (target == null && source != null || target != null && source == null){
-            System.out.println("null is different");
-            return false;
-        }
-        //judge whether equal two array length
-        if(target.length != source.length){
-            System.out.println("array length not equal");
-            return false;
-        }
-        //compare two array value is equal
-        for (int i = 0; i < target.length; i++){
-            if(target[i] != source[i]){
-                System.out.println("array length is " + target.length + "  " + source.length +
-                        "\n在比较第" + i + "个数字,target : " + target[i] + "和 source：" + source[i] + "时出错");
-                return false;
+        //begin
+        for (int end = arr.length - 1; end > 0; end--) {
+            for (int start = 0; start < end; start++) {
+                if(arr[start] > arr[start + 1]){
+                    BaseUtils.swap_bit(arr, start, start + 1);
+                }
             }
         }
-        return true;
+        //end
     }
 
-    //-----------------------------     test ------------------------------
-
-    //test main
     @Test
-    public void testMain(){
-        int compareTime = 120000;
-        int maxSize = extracted();
-        int maxValue = 2000;
-        boolean flag = true;
-
-        int i = 0;
-        for(i = 0; i < compareTime; i++) {
-            //get random array value
-            int[] sourceArr = generateRandomArray(maxSize, maxValue);
-            int[] targetArr = copyArray(sourceArr);
-            //use mySort bubbleSort
-            bubbleSort(sourceArr);
-            //use compare Sort
-            comparator(targetArr);
-            //judge two array is equal
-            flag = isEqual(targetArr, sourceArr);
-            if (flag == false){
-                System.out.println("target:");
-                printArr(targetArr);
-                System.out.println("source:");
-                printArr(sourceArr);
+    public void test01(){
+        int is_ok = 0;
+        int times = 0;
+        for (;times <= 999999; times++){
+            int[] source = BaseUtils.generateRandomArray(1000, 1000);
+            int[] comparat = BaseUtils.copyArrays(source);
+            sort_bubble(source, true);
+            BaseUtils.comparator(comparat);
+            if(!BaseUtils.isEqual(source, comparat)){
+                is_ok = 1;
                 break;
             }
         }
-        System.out.println(i);
-        System.out.println(flag ? "yes perfect" : "fuck, you are error");
+        System.out.println(is_ok == 0 ? "yes" : "no");
+        System.out.println("times:" + times);
     }
 
-    private int extracted() {
-        int maxSize = 100;
-        return maxSize;
-    }
-
-    // test generate random array
     @Test
-    public void testGenerate(){
-        int[] arr = generateRandomArray(20,60);
-        printArr(arr);
-        System.out.println(arr.length + " is arr length");
-        //test sort comparator
-        comparator(arr);
-        printArr(arr);
-    }
-
-    //
-    public void initTestMySort(String[] args) {
-        int[] arr = {2,7,2,3,1,6,3,2};
-        bubbleSort(arr);
-        printArr(arr);
-    }
-
-    //print array
-    private static void printArr(int[] arr) {
-        for (int i : arr) {
-            System.out.print(i + " ");
+    public void test02() {
+        boolean is_ok = true;
+        int i = 0;
+        for (; i < 100220; i++) {
+            int[] arrays = BaseUtils.generateRandomArray(100, 100);
+            int[] copyArrays = BaseUtils.copyArrays(arrays);
+            sort_bubble(arrays);
+            BaseUtils.comparator(copyArrays);
+            if (!BaseUtils.isEqual(arrays, copyArrays)){
+                System.out.println("error");
+                is_ok = false;
+                break;
+            }
         }
-        System.out.println();
+        System.out.println(is_ok ? "yes" : "no");
+        System.out.println("i:" + i);
     }
 }
