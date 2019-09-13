@@ -1,4 +1,7 @@
-target/
-.idea/
+/target/
+/.settings/
+.project
+.classpath
+bin/
 /.idea/
-test/
+BaseAlgorithm.iml

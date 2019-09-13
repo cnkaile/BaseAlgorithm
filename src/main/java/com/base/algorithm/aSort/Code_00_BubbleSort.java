@@ -84,7 +84,7 @@ public class Code_00_BubbleSort {
             sort_bubble(arrays);
             BaseUtils.comparator(copyArrays);
             if (!BaseUtils.isEqual(arrays, copyArrays)){
-                BaseUtils.printArr(arrays);
+                System.out.println("error");
                 is_ok = false;
                 break;
             }
