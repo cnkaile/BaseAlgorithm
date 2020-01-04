@@ -81,7 +81,7 @@ public class Code_03_QuickSort {
     public void test(){
         int times = 0;
         int isok = 0;
-        for (times = 0; times < 100000; times++) {
+        for (times = 0; times < 100; times++) {
             int[] source = BaseUtils.generateRandomArray(100000, 1000);
             int[] target = BaseUtils.copyArrays(source);
             sort_quick(source);

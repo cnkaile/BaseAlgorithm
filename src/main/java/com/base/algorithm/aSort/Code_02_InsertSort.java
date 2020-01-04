@@ -39,8 +39,9 @@ public class Code_02_InsertSort {
     public void test(){
         int isok = 0;
         int times = 0;
-        for (; times < 99999; times++) {
-            int[] source = BaseUtils.generateRandomArray(1000, 1000);
+        long s = System.currentTimeMillis();
+        for (; times < 100; times++) {
+            int[] source = BaseUtils.generateRandomArray(10000, 1000);
             int[] target = BaseUtils.copyArrays(source);
             sort_insert(source);
             BaseUtils.comparator(target);
@@ -49,9 +50,12 @@ public class Code_02_InsertSort {
                 BaseUtils.printArr(source);
                 BaseUtils.printArr(target);
                 break;
+            }else{
+                System.out.println(times);
             }
         }
-        System.out.println();
+        long e = System.currentTimeMillis();
+        System.out.println((e - s) / 1000);
         System.out.println(isok == 0 ? "success" : "fail");
         System.out.println("times:"  + times);
     }
