@@ -1,4 +1,4 @@
-package com.base.algorithm.aSort;
+package com.base.algorithm.aSort.baseInterface;
 
 /**
  * 基础排序接口
