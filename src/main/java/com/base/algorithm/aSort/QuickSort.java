@@ -3,12 +3,10 @@ package com.base.algorithm.aSort;
 import com.base.util.BaseUtils;
 import org.junit.Test;
 
-import java.util.Arrays;
-
 /**
  * 快排
  */
-public class Code_031_QuickSort {
+public class QuickSort implements BaseSort{
 
     public int[] sort_quick(int[] source) {
         if (source == null || source.length < 2) {
@@ -48,26 +46,12 @@ public class Code_031_QuickSort {
 
     @Test
     public void test(){
-        int times = 0;
-        int isok = 0;
-        long s = System.currentTimeMillis();
-        for (times = 0; times < 100; times++) {
-            int[] source = BaseUtils.generateRandomArray(10000, 1000);
-            int[] target = BaseUtils.copyArrays(source);
-            sort_quick(source);
-            BaseUtils.comparator(target);
-            if(!BaseUtils.isEqual(source, target)){
-                BaseUtils.printArr(source);
-                BaseUtils.printArr(target);
-                isok = 1;
-                break;
-            }else{
-                System.out.println(times);
-            }
-        }
-        long e = System.currentTimeMillis();
-        System.out.println((e - s) / 1000);
-        System.out.println(isok == 0 ? "ok" : "fail");
-        System.out.println("times:" + times);
+        BaseUtils.exeSortMethod(new QuickSort());
+    }
+
+    @Override
+    public int[] sort(int[] arr) {
+        sort_quick(arr);
+        return arr;
     }
 }

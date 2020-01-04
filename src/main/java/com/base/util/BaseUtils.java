@@ -1,5 +1,6 @@
 package com.base.util;
 
+import com.base.algorithm.aSort.BaseSort;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -118,12 +119,32 @@ public class BaseUtils {
         return 0;
     }
 
-    @Test
-    public void test(){
-        int[] arr = BaseUtils.generateRandomArray(100, 100);
-        for (int i : arr) {
-            System.out.println(i);
+    /**
+     *
+     * @param sortObj
+     * @return
+     */
+    public static boolean exeSortMethod(BaseSort sortObj){
+        int times = 0;
+        int isok = 0;
+        long s = System.currentTimeMillis();
+        for (times = 0; times < 100; times++) {
+            int[] source = BaseUtils.generateRandomArray(10000, 1000);
+            int[] target = BaseUtils.copyArrays(source);
+            sortObj.sort(source);
+            BaseUtils.comparator(target);
+            if(!BaseUtils.isEqual(source, target)){
+                BaseUtils.printArr(source);
+                BaseUtils.printArr(target);
+                isok = 1;
+                break;
+            }else{
+                System.out.println(times);
+            }
         }
-
+        //
+        long e = System.currentTimeMillis();
+        System.out.println((e - s) / 1000);
+        return isok == 0;
     }
 }
