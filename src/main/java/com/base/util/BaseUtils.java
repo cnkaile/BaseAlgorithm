@@ -1,6 +1,6 @@
 package com.base.util;
 
-import com.base.algorithm.aSort.BaseSort;
+import com.base.algorithm.aSort.baseInterface.BaseSort;
 import org.junit.Test;
 
 import java.util.Arrays;

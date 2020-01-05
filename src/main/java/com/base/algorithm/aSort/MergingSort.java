@@ -1,5 +1,6 @@
 package com.base.algorithm.aSort;
 
+import com.base.algorithm.aSort.baseInterface.BaseSort;
 import com.base.util.BaseUtils;
 import org.junit.Test;
 
